@@ -3,13 +3,14 @@
 
 set -e
 export SCRIPT_DIR=$TOOLS/osic-multitool
+export PDK_ROOT=/usr/share/pdk/
 
 if [ ! -d "$PDK_ROOT" ]; then
-    mkdir -p "$PDK_ROOT"
+    sudo mkdir -p "$PDK_ROOT"
 fi
 
 # Install ciel via pip
-pip3 install --upgrade --no-cache-dir --break-system-packages --ignore-installed \
+python3 -m pip install --upgrade --no-cache-dir --break-system-packages --ignore-installed \
 	ciel
 
 ####################
@@ -79,7 +80,10 @@ pip3 install --upgrade --no-cache-dir --break-system-packages --ignore-installed
 
 echo "[INFO] Installing GF180 PDK."
 # FIXME: use common tag from Dockerfile.
-python3 -m ciel enable 8fa792c6f7db44c0873c619d62190496b89c0083 --pdk-family gf180mcu
+sudo chown -R 1000:1000 $PDK_ROOT
+#python3 -m ciel enable 8fa792c6f7db44c0873c619d62190496b89c0083 --pdk-family gf180mcu
+python3 -m ciel enable 486fb8633c3d95ae475a5ccd68d0066c25919bb5 --pdk-family gf180mcu
+
 
 # Remove gf180mcuA, gf180mcuB and gf180mcuC for size reasons
 rm -rf "$PDK_ROOT"/ciel/gf180mcu/versions/*/gf180mcuA

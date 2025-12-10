@@ -1,6 +1,7 @@
 #!/bin/bash
 #Based on https://github.com/iic-jku/IIC-OSIC-TOOLS/blob/main/_build/images/netgen/scripts/install.sh
 # Env variables
+export TOOLS=$HOME/tools
 export NETGEN_REPO_URL="https://github.com/rtimothyedwards/netgen.git"
 export NETGEN_REPO_COMMIT="1.5.305"
 export NETGEN_NAME="netgen"
